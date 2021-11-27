@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Pizza.Castle.Menu.Service.API.Controllers;
+namespace PizzaCastle.MenuService.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]

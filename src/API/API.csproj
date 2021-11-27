@@ -5,8 +5,8 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <AssemblyName>Pizza.Castle.Menu.Service.API</AssemblyName>
-        <RootNamespace>Pizza.Castle.Menu.Service.API</RootNamespace>
+        <AssemblyName>PizzaCastle.MenuService.API</AssemblyName>
+        <RootNamespace>PizzaCastle.MenuService.API</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

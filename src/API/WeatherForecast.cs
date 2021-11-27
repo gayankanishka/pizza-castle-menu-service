@@ -1,4 +1,4 @@
-namespace Pizza.Castle.Menu.Service.API;
+namespace PizzaCastle.MenuService.API;
 
 public class WeatherForecast
 {
