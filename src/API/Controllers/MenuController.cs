@@ -17,6 +17,11 @@ namespace PizzaCastle.MenuService.API.Controllers
             _mediator = mediator;
         }
         
+        // TODO: complete required endpoints
+        // add required repositories
+        // add crud operations
+        // add commands and queries
+        
         // GET api/v1/[controller]/items
         [HttpGet]
         [Route("items")]
