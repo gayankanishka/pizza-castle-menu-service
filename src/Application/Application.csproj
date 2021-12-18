@@ -17,6 +17,8 @@
 
     <ItemGroup>
       <Folder Include="MenuItems\Commands" />
+      <Folder Include="MenuItemTypes\Commands" />
+      <Folder Include="MenuItemTypes\Queries" />
     </ItemGroup>
 
     <ItemGroup>
