@@ -38,6 +38,7 @@ public static class DependencyInjection
         }
         
         services.AddScoped<IMenuItemRepository, MenuItemRepository>();
+        services.AddScoped<IMenuItemTypeRepository, MenuItemTypeRepository>();
         
         return services;
     }
