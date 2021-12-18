@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PizzaCastle.MenuService.Application.Common;
 using PizzaCastle.MenuService.Infrastructure.Persistence;
+using PizzaCastle.MenuService.Infrastructure.Persistence.Repositories;
 
 namespace PizzaCastle.MenuService.Infrastructure;
 
@@ -23,17 +25,19 @@ public static class DependencyInjection
 
         if (isInMemoryDatabase)
         {
-            services.AddPooledDbContextFactory<ApplicationDbContext>(_ =>
+            services.AddDbContextPool<ApplicationDbContext>(_ =>
                 _.UseInMemoryDatabase("MenuServiceDb"));
         }
         else
         {
-            services.AddPooledDbContextFactory<ApplicationDbContext>(_ =>
+            services.AddDbContextPool<ApplicationDbContext>(_ =>
                 _.UseNpgsql(
                     configuration.GetConnectionString("PostgresDbConnection"),
                     a =>
                         a.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
         }
+        
+        services.AddScoped<IMenuItemRepository, MenuItemRepository>();
         
         return services;
     }

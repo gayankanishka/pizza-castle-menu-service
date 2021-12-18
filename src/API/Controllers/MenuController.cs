@@ -1,6 +1,7 @@
 using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PizzaCastle.MenuService.Application.MenuItems.Queries.GetAllMenuItems;
 using PizzaCastle.MenuService.Domain.Dtos;
 
 namespace PizzaCastle.MenuService.API.Controllers
@@ -19,18 +20,19 @@ namespace PizzaCastle.MenuService.API.Controllers
         // GET api/v1/[controller]/items
         [HttpGet]
         [Route("items")]
-        [ProducesResponseType(typeof(IEnumerable<PizzaDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<MenuItemDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> GetAllMenuItemsAsync()
+        public async Task<IActionResult> GetAllMenuItemsAsync(CancellationToken cancellationToken)
         {
-            return Ok(new PizzaDto());
+            var result = await _mediator.Send(new GetAllMenuItemsQuery(), cancellationToken);
+            return Ok(result);
         }
         
         [HttpGet]
         [Route("items/{id:guid}")]
-        [ProducesResponseType(typeof(PizzaDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(MenuItemDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult GetMenuItem(Guid id)
+        public IActionResult GetMenuItem(Guid id, CancellationToken cancellationToken)
         {
             return Ok();
         }
