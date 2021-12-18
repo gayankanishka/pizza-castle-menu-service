@@ -8,8 +8,4 @@
         <RootNamespace>PizzaCastle.MenuService.Domain</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Dtos" />
-    </ItemGroup>
-
 </Project>

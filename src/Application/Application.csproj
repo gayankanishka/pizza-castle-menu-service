@@ -15,7 +15,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Pizzas" />
+      <Folder Include="Pizzas\GetAllMenuItems" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>
