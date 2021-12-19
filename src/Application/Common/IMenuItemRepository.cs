@@ -4,7 +4,7 @@ namespace PizzaCastle.MenuService.Application.Common;
 
 public interface IMenuItemRepository
 {
-    IQueryable<MenuItem> GetMenuItems();
+    IQueryable<MenuItem> GetAll();
     Task<MenuItem?> GetMenuItemAsync(Guid id, CancellationToken cancellationToken);
-    IQueryable<MenuItem> GetMenuItemsByTypeId(Guid typeId);
+    IQueryable<MenuItem> GetMenuItemsByCategoryId(Guid categoryId);
 }

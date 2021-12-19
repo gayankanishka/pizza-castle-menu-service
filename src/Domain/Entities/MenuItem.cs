@@ -9,8 +9,8 @@ public class MenuItem : AuditableEntity
     [Required]
     public string? Name { get; set; }
     public string Description { get; set; }
-    public Guid MenuItemTypeId { get; set; }
-    public MenuItemType MenuItemType { get; set; }
+    public Guid MenuCategoryId { get; set; }
+    public MenuCategory MenuCategory { get; set; }
     [Required]
     public double Price { get; set; }
     public string ImageUrl { get; set; }

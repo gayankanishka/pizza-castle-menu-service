@@ -2,7 +2,7 @@ using PizzaCastle.MenuService.Domain.Entities;
 
 namespace PizzaCastle.MenuService.Application.Common;
 
-public interface IMenuItemTypeRepository
+public interface IMenuCategoryRepository
 {
-    IQueryable<MenuItemType> GetAll();
+    IQueryable<MenuCategory> GetAll();
 }

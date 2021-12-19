@@ -3,7 +3,7 @@ using PizzaCastle.MenuService.Domain.Common;
 
 namespace PizzaCastle.MenuService.Domain.Entities;
 
-public class MenuItemType : AuditableEntity
+public class MenuCategory : AuditableEntity
 {
     public Guid Id { get; set; }
     [Required]

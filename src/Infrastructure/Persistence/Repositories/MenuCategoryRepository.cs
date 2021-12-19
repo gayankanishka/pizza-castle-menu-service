@@ -3,17 +3,17 @@ using PizzaCastle.MenuService.Domain.Entities;
 
 namespace PizzaCastle.MenuService.Infrastructure.Persistence.Repositories;
 
-public class MenuItemTypeRepository : IMenuItemTypeRepository
+public class MenuCategoryRepository : IMenuCategoryRepository
 {
     private readonly ApplicationDbContext _context;
 
-    public MenuItemTypeRepository(ApplicationDbContext context)
+    public MenuCategoryRepository(ApplicationDbContext context)
     {
         _context = context;
     }
 
-    public IQueryable<MenuItemType> GetAll()
+    public IQueryable<MenuCategory> GetAll()
     {
-        return _context.MenuItemTypes;
+        return _context.MenuCategories;
     }
 }

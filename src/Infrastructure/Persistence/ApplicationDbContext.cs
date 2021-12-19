@@ -15,6 +15,6 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<MenuItem> MenuItems { get; set; } = default!;
-    public DbSet<MenuItemType> MenuItemTypes { get; set; } = default!;
+    public DbSet<MenuCategory> MenuCategories { get; set; } = default!;
 
 }

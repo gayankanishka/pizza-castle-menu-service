@@ -13,7 +13,7 @@ public class MenuItemRepository : IMenuItemRepository
         _context = context;
     }
     
-    public IQueryable<MenuItem> GetMenuItems()
+    public IQueryable<MenuItem> GetAll()
     {
         return _context.MenuItems;
     }
@@ -25,9 +25,9 @@ public class MenuItemRepository : IMenuItemRepository
             .FirstOrDefaultAsync(cancellationToken);
     }
 
-    public IQueryable<MenuItem> GetMenuItemsByTypeId(Guid typeId)
+    public IQueryable<MenuItem> GetMenuItemsByCategoryId(Guid categoryId)
     {
         return _context.MenuItems
-            .Where(x => x.MenuItemType.Id == typeId);
+            .Where(x => x.MenuCategory.Id == categoryId);
     }
 }

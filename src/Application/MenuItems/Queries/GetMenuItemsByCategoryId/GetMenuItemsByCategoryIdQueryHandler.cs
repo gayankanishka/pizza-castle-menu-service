@@ -4,23 +4,23 @@ using Microsoft.EntityFrameworkCore;
 using PizzaCastle.MenuService.Application.Common;
 using PizzaCastle.MenuService.Domain.Dtos;
 
-namespace PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemsByTypeId;
+namespace PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemsByCategoryId;
 
-public class GetMenuItemsByTypeIdQueryHandler : IRequestHandler<GetMenuItemsByTypeIdQuery, IEnumerable<MenuItemDto>>
+public class GetMenuItemsByCategoryIdQueryHandler : IRequestHandler<GetMenuItemsByCategoryIdQuery, IEnumerable<MenuItemDto>>
 {
     private readonly IMapper _mapper;
     private readonly IMenuItemRepository _repository;
 
-    public GetMenuItemsByTypeIdQueryHandler(IMapper mapper, IMenuItemRepository repository)
+    public GetMenuItemsByCategoryIdQueryHandler(IMapper mapper, IMenuItemRepository repository)
     {
         _mapper = mapper;
         _repository = repository;
     }
     
-    public async Task<IEnumerable<MenuItemDto>> Handle(GetMenuItemsByTypeIdQuery request,
+    public async Task<IEnumerable<MenuItemDto>> Handle(GetMenuItemsByCategoryIdQuery request,
         CancellationToken cancellationToken)
     {
-        var menuItems = await _repository.GetMenuItemsByTypeId(request.TypeId)
+        var menuItems = await _repository.GetMenuItemsByCategoryId(request.CategoryId)
             .ToListAsync(cancellationToken);
         
         return _mapper.Map<IEnumerable<MenuItemDto>>(menuItems);

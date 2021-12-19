@@ -1,15 +1,15 @@
 using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PizzaCastle.MenuService.Application.MenuItems.Queries.GetAllMenuItems;
+using PizzaCastle.MenuService.Application.MenuCategories.Queries.GetMenuCategories;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemById;
-using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemsByTypeId;
-using PizzaCastle.MenuService.Application.MenuItemTypes.Queries.GetMenuItemTypes;
+using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItems;
+using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemsByCategoryId;
 using PizzaCastle.MenuService.Domain.Dtos;
 
 namespace PizzaCastle.MenuService.API.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/menu")]
     [ApiController]
     public class MenuController : ControllerBase
     {
@@ -21,23 +21,22 @@ namespace PizzaCastle.MenuService.API.Controllers
         }
         
         // TODO: complete required endpoints
-        // add required repositories
         // add crud operations
         // add commands and queries
         
-        // GET api/v1/[controller]/items
+        // GET api/v1/menu/items
         [HttpGet]
         [Route("items")]
         [ProducesResponseType(typeof(IEnumerable<MenuItemDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetAllMenuItemsAsync(CancellationToken cancellationToken)
         {
-            var results = await _mediator.Send(new GetAllMenuItemsQuery(),
+            var results = await _mediator.Send(new GetMenuItemsQuery(),
                 cancellationToken);
             return Ok(results);
         }
         
-        // GET api/v1/[controller]/items/{id}
+        // GET api/v1/menu/items/{id}
         [HttpGet]
         [Route("items/{id:guid}")]
         [ProducesResponseType(typeof(MenuItemDto), (int)HttpStatusCode.OK)]
@@ -60,34 +59,34 @@ namespace PizzaCastle.MenuService.API.Controllers
             return Ok(result);
         }
         
-        // GET api/v1/[controller]/types/{typeId}/items
+        // GET api/v1/menu/categories/{categoryId}/items
         [HttpGet]
-        [Route("types/{typeId:guid}/items")]
+        [Route("categories/{categoryId:guid}/items")]
         [ProducesResponseType(typeof(IEnumerable<MenuItemDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> GetMenuItemsByTypeAsync(Guid typeId, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetMenuItemsByCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
         {
-            if (typeId == Guid.Empty || !ModelState.IsValid)
+            if (categoryId == Guid.Empty || !ModelState.IsValid)
             {
                 return BadRequest();
             }
             
-            var results = await _mediator.Send(new GetMenuItemsByTypeIdQuery(typeId),
+            var results = await _mediator.Send(new GetMenuItemsByCategoryIdQuery(categoryId),
                 cancellationToken);
 
             return Ok(results);
         }
         
-        // GET api/v1/[controller]/types
+        // GET api/v1/menu/categories
         [HttpGet]
-        [Route("types")]
-        [ProducesResponseType(typeof(IEnumerable<MenuItemTypeDto>), (int)HttpStatusCode.OK)]
+        [Route("categories")]
+        [ProducesResponseType(typeof(IEnumerable<MenuCategoryDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetMenuItemsTypesAsync(CancellationToken cancellationToken)
         {
-            var results = await _mediator.Send(new GetMenuItemTypesQuery(),
+            var results = await _mediator.Send(new GetMenuCategoriesQuery(),
                 cancellationToken);
             return Ok(results);
         }
