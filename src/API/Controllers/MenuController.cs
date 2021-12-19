@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PizzaCastle.MenuService.Application.MenuCategories.Commands.AddMenuCategory;
 using PizzaCastle.MenuService.Application.MenuCategories.Queries.GetMenuCategories;
+using PizzaCastle.MenuService.Application.MenuItems.Commands.AddMenuItem;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemById;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItems;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemsByCategoryId;
@@ -20,11 +21,7 @@ namespace PizzaCastle.MenuService.API.Controllers
         {
             _mediator = mediator;
         }
-        
-        // TODO: complete required endpoints
-        // add crud operations
-        // add commands and queries
-        
+
         // GET api/v1/menu/items
         [HttpGet]
         [Route("items")]
@@ -101,6 +98,19 @@ namespace PizzaCastle.MenuService.API.Controllers
             var results = await _mediator.Send(new AddMenuCategoryCommand(addMenuCategoryDto),
                 cancellationToken);
             return Created(nameof(AddMenuCategoryAsync), results);
+        }
+        
+        // POST api/v1/menu/categories/{categoryId}/items
+        [HttpPost]
+        [Route("categories/{categoryId:guid}/items")]
+        [ProducesResponseType(typeof(MenuCategoryDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> AddMenuItemAsync([FromRoute] Guid categoryId, [FromBody] AddMenuItemDto addMenuCategoryDto,
+            CancellationToken cancellationToken)
+        {
+            var results = await _mediator.Send(new AddMenuItemCommand(categoryId, addMenuCategoryDto),
+                cancellationToken);
+            return Created(nameof(AddMenuItemAsync), results);
         }
     }
 }

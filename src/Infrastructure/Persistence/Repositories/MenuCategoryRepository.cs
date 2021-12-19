@@ -17,10 +17,10 @@ public class MenuCategoryRepository : IMenuCategoryRepository
         return _context.MenuCategories;
     }
 
-    public async Task<MenuCategory> AddAsync(MenuCategory menuCategory)
+    public async Task<MenuCategory> AddAsync(MenuCategory menuCategory, CancellationToken cancellationToken)
     {
-        await _context.MenuCategories.AddAsync(menuCategory);
-        await _context.SaveChangesAsync();
+        await _context.MenuCategories.AddAsync(menuCategory, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
 
         return menuCategory;
     }

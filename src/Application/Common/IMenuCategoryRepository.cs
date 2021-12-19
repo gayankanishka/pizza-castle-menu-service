@@ -5,5 +5,5 @@ namespace PizzaCastle.MenuService.Application.Common;
 public interface IMenuCategoryRepository
 {
     IQueryable<MenuCategory> GetAll();
-    Task<MenuCategory> AddAsync(MenuCategory menuCategory);
+    Task<MenuCategory> AddAsync(MenuCategory menuCategory, CancellationToken cancellationToken);
 }

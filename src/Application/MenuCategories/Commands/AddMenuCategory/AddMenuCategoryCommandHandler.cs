@@ -19,8 +19,9 @@ public class AddMenuCategoryCommandHandler : IRequestHandler<AddMenuCategoryComm
 
     public async Task<MenuCategoryDto> Handle(AddMenuCategoryCommand request, CancellationToken cancellationToken)
     {
-        var result = await _repository.AddAsync(
-            _mapper.Map<MenuCategory>(request.AddMenuCategoryDto));
-        return _mapper.Map<MenuCategoryDto>(result);
+        var menuCategory = _mapper.Map<MenuCategory>(request.AddMenuCategoryDto);
+        await _repository.AddAsync(menuCategory, cancellationToken);
+        
+        return _mapper.Map<MenuCategoryDto>(menuCategory);
     }
 }

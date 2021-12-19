@@ -30,4 +30,12 @@ public class MenuItemRepository : IMenuItemRepository
         return _context.MenuItems
             .Where(x => x.MenuCategory.Id == categoryId);
     }
+
+    public async Task<MenuItem> AddAsync(MenuItem menuItem, CancellationToken cancellationToken)
+    {
+        await _context.MenuItems.AddAsync(menuItem, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return menuItem;
+    }
 }
