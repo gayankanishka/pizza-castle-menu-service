@@ -24,4 +24,10 @@ public class MenuItemRepository : IMenuItemRepository
             .Where(x => x.Id == id)
             .FirstOrDefaultAsync(cancellationToken);
     }
+
+    public IQueryable<MenuItem> GetMenuItemsByTypeId(Guid typeId)
+    {
+        return _context.MenuItems
+            .Where(x => x.MenuItemType.Id == typeId);
+    }
 }

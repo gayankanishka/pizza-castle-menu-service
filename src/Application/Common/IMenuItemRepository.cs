@@ -6,4 +6,5 @@ public interface IMenuItemRepository
 {
     IQueryable<MenuItem> GetMenuItems();
     Task<MenuItem?> GetMenuItemAsync(Guid id, CancellationToken cancellationToken);
+    IQueryable<MenuItem> GetMenuItemsByTypeId(Guid typeId);
 }

@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetAllMenuItems;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemById;
+using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemsByTypeId;
 using PizzaCastle.MenuService.Domain.Dtos;
 
 namespace PizzaCastle.MenuService.API.Controllers
@@ -30,16 +31,17 @@ namespace PizzaCastle.MenuService.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetAllMenuItemsAsync(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetAllMenuItemsQuery(), cancellationToken);
-            return Ok(result);
+            var results = await _mediator.Send(new GetAllMenuItemsQuery(), cancellationToken);
+            return Ok(results);
         }
         
+        // GET api/v1/[controller]/items/{id}
         [HttpGet]
         [Route("items/{id:guid}")]
         [ProducesResponseType(typeof(MenuItemDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> GetMenuItem(Guid id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetMenuItemAsync(Guid id, CancellationToken cancellationToken)
         {
             if (id == Guid.Empty || !ModelState.IsValid)
             {
@@ -54,6 +56,36 @@ namespace PizzaCastle.MenuService.API.Controllers
             }
             
             return Ok(result);
+        }
+        
+        // GET api/v1/[controller]/types/{typeId}/items
+        [HttpGet]
+        [Route("types/{typeId:guid}/items")]
+        [ProducesResponseType(typeof(MenuItemDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetMenuItemsByTypeAsync(Guid typeId, CancellationToken cancellationToken)
+        {
+            if (typeId == Guid.Empty || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            
+            var results = await _mediator.Send(new GetMenuItemsByTypeIdQuery(typeId),
+                cancellationToken);
+
+            return Ok(results);
+        }
+        
+        // GET api/v1/[controller]/types
+        [HttpGet]
+        [Route("types")]
+        [ProducesResponseType(typeof(MenuItemDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetMenuItemsTypesAsync(CancellationToken cancellationToken)
+        {
+            return Ok();
         }
     }
 }
