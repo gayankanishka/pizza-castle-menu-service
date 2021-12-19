@@ -15,12 +15,14 @@ public class MenuItemRepository : IMenuItemRepository
     
     public IQueryable<MenuItem> GetAll()
     {
-        return _context.MenuItems;
+        return _context.MenuItems
+            .Include(x => x.MenuCategory);
     }
 
     public async Task<MenuItem?> GetMenuItemAsync(Guid id, CancellationToken cancellationToken)
     {
         return await _context.MenuItems
+            .Include(x => x.MenuCategory)
             .Where(x => x.Id == id)
             .FirstOrDefaultAsync(cancellationToken);
     }
@@ -28,6 +30,7 @@ public class MenuItemRepository : IMenuItemRepository
     public IQueryable<MenuItem> GetMenuItemsByCategoryId(Guid categoryId)
     {
         return _context.MenuItems
+            .Include(x => x.MenuCategory)
             .Where(x => x.MenuCategory.Id == categoryId);
     }
 

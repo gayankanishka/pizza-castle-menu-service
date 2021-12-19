@@ -10,17 +10,27 @@ public class AddMenuItemCommandHandler : IRequestHandler<AddMenuItemCommand, Men
 {
     private readonly IMapper _mapper;
     private readonly IMenuItemRepository _repository;
+    private readonly IMenuCategoryRepository _categoryRepository;
 
-    public AddMenuItemCommandHandler(IMapper mapper, IMenuItemRepository repository)
+    public AddMenuItemCommandHandler(IMapper mapper, IMenuItemRepository repository, IMenuCategoryRepository categoryRepository)
     {
         _mapper = mapper;
         _repository = repository;
+        _categoryRepository = categoryRepository;
     }
     
     public async Task<MenuItemDto> Handle(AddMenuItemCommand request, CancellationToken cancellationToken)
     {
+        var category = await _categoryRepository.GetMenuCategoryAsync(request.CategoryId, cancellationToken);
+
+        if (category == null)
+        {
+            throw new Exception("Category not found");
+        }
+        
         var menuItem = _mapper.Map<MenuItem>(request.AddMenuItemDto);
-        menuItem.MenuCategoryId = request.CategoryId;
+        menuItem.MenuCategory = category;
+        
         await _repository.AddAsync(menuItem, cancellationToken);
         
         return _mapper.Map<MenuItemDto>(menuItem);;

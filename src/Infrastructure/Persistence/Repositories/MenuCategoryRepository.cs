@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using PizzaCastle.MenuService.Application.Common;
 using PizzaCastle.MenuService.Domain.Entities;
 
@@ -15,6 +16,13 @@ public class MenuCategoryRepository : IMenuCategoryRepository
     public IQueryable<MenuCategory> GetAll()
     {
         return _context.MenuCategories;
+    }
+
+    public async Task<MenuCategory?> GetMenuCategoryAsync(Guid id, CancellationToken cancellationToken)
+    {
+        return await _context.MenuCategories
+            .Where(x => x.Id == id)
+            .FirstOrDefaultAsync(cancellationToken);
     }
 
     public async Task<MenuCategory> AddAsync(MenuCategory menuCategory, CancellationToken cancellationToken)
