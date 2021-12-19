@@ -20,9 +20,8 @@ public class GetMenuItemsByCategoryIdQueryHandler : IRequestHandler<GetMenuItems
     public async Task<IEnumerable<MenuItemDto>> Handle(GetMenuItemsByCategoryIdQuery request,
         CancellationToken cancellationToken)
     {
-        var menuItems = await _repository.GetMenuItemsByCategoryId(request.CategoryId)
+        return await _repository.GetMenuItemsByCategoryId(request.CategoryId)
+            .Select(x => _mapper.Map<MenuItemDto>(x))
             .ToListAsync(cancellationToken);
-        
-        return _mapper.Map<IEnumerable<MenuItemDto>>(menuItems);
     }
 }
