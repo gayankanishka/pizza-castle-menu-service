@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PizzaCastle.MenuService.Domain.Entities;
+using PizzaCastle.MenuService.Infrastructure.Persistence.Configuration;
 
 namespace PizzaCastle.MenuService.Infrastructure.Persistence;
 
@@ -12,6 +13,8 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new MenuCategoryConfiguration());
+        modelBuilder.ApplyConfiguration(new MenuItemConfiguration());
     }
 
     public DbSet<MenuItem> MenuItems { get; set; } = default!;

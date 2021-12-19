@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PizzaCastle.MenuService.Application.Common;
 using PizzaCastle.MenuService.Infrastructure.Persistence;
+using PizzaCastle.MenuService.Infrastructure.Persistence.Imports;
 using PizzaCastle.MenuService.Infrastructure.Persistence.Repositories;
 
 namespace PizzaCastle.MenuService.Infrastructure;
@@ -27,6 +28,7 @@ public static class DependencyInjection
         {
             services.AddDbContextPool<ApplicationDbContext>(_ =>
                 _.UseInMemoryDatabase("MenuServiceDb"));
+            services.SeedDatabase();
         }
         else
         {
