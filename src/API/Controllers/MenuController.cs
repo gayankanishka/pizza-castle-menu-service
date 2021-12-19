@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetAllMenuItems;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemById;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemsByTypeId;
+using PizzaCastle.MenuService.Application.MenuItemTypes.Queries.GetMenuItemTypes;
 using PizzaCastle.MenuService.Domain.Dtos;
 
 namespace PizzaCastle.MenuService.API.Controllers
@@ -31,7 +32,8 @@ namespace PizzaCastle.MenuService.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetAllMenuItemsAsync(CancellationToken cancellationToken)
         {
-            var results = await _mediator.Send(new GetAllMenuItemsQuery(), cancellationToken);
+            var results = await _mediator.Send(new GetAllMenuItemsQuery(),
+                cancellationToken);
             return Ok(results);
         }
         
@@ -61,7 +63,7 @@ namespace PizzaCastle.MenuService.API.Controllers
         // GET api/v1/[controller]/types/{typeId}/items
         [HttpGet]
         [Route("types/{typeId:guid}/items")]
-        [ProducesResponseType(typeof(MenuItemDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<MenuItemDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetMenuItemsByTypeAsync(Guid typeId, CancellationToken cancellationToken)
@@ -80,12 +82,14 @@ namespace PizzaCastle.MenuService.API.Controllers
         // GET api/v1/[controller]/types
         [HttpGet]
         [Route("types")]
-        [ProducesResponseType(typeof(MenuItemDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<MenuItemTypeDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetMenuItemsTypesAsync(CancellationToken cancellationToken)
         {
-            return Ok();
+            var results = await _mediator.Send(new GetMenuItemTypesQuery(),
+                cancellationToken);
+            return Ok(results);
         }
     }
 }
