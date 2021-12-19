@@ -9,5 +9,6 @@ public class MenuCategoryMapping : Profile
     public MenuCategoryMapping()
     {
         CreateMap<MenuCategory, MenuCategoryDto>();
+        CreateMap<AddMenuCategoryDto, MenuCategory>();
     }
 }

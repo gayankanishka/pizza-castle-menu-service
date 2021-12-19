@@ -1,6 +1,7 @@
 using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PizzaCastle.MenuService.Application.MenuCategories.Commands.AddMenuCategory;
 using PizzaCastle.MenuService.Application.MenuCategories.Queries.GetMenuCategories;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemById;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItems;
@@ -64,7 +65,6 @@ namespace PizzaCastle.MenuService.API.Controllers
         [Route("categories/{categoryId:guid}/items")]
         [ProducesResponseType(typeof(IEnumerable<MenuItemDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetMenuItemsByCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
         {
             if (categoryId == Guid.Empty || !ModelState.IsValid)
@@ -83,12 +83,24 @@ namespace PizzaCastle.MenuService.API.Controllers
         [Route("categories")]
         [ProducesResponseType(typeof(IEnumerable<MenuCategoryDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> GetMenuItemsTypesAsync(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetMenuCategoriesAsync(CancellationToken cancellationToken)
         {
             var results = await _mediator.Send(new GetMenuCategoriesQuery(),
                 cancellationToken);
             return Ok(results);
+        }
+        
+        // POST api/v1/menu/categories
+        [HttpPost]
+        [Route("categories")]
+        [ProducesResponseType(typeof(MenuCategoryDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> AddMenuCategoryAsync([FromBody] AddMenuCategoryDto addMenuCategoryDto,
+            CancellationToken cancellationToken)
+        {
+            var results = await _mediator.Send(new AddMenuCategoryCommand(addMenuCategoryDto),
+                cancellationToken);
+            return Created(nameof(AddMenuCategoryAsync), results);
         }
     }
 }

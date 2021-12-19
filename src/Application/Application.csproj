@@ -16,7 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="MenuCategories\Commands" />
       <Folder Include="MenuItems\Commands" />
     </ItemGroup>
 
