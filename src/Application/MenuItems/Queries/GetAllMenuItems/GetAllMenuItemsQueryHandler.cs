@@ -9,19 +9,19 @@ namespace PizzaCastle.MenuService.Application.MenuItems.Queries.GetAllMenuItems;
 public class GetAllMenuItemsQueryHandler : IRequestHandler<GetAllMenuItemsQuery, IEnumerable<MenuItemDto>>
 {
     private readonly IMapper _mapper;
-    private readonly IMenuItemRepository _menuItemRepository;
+    private readonly IMenuItemRepository _repository;
     
-    public GetAllMenuItemsQueryHandler(IMapper mapper, IMenuItemRepository menuItemRepository)
+    public GetAllMenuItemsQueryHandler(IMapper mapper, IMenuItemRepository repository)
     {
         _mapper = mapper;
-        _menuItemRepository = menuItemRepository;
+        _repository = repository;
     }
 
     public async Task<IEnumerable<MenuItemDto>> Handle(GetAllMenuItemsQuery request, CancellationToken cancellationToken)
     {
-        var menuItems = await _menuItemRepository.GetMenuItems()
-            .ToListAsync(cancellationToken);
-
-        return _mapper.Map<IEnumerable<MenuItemDto>>(menuItems);
+         return await _repository.GetMenuItems()
+             .Select(x => _mapper.Map<MenuItemDto>(x))
+             .OrderBy(x => x.Name)
+             .ToListAsync(cancellationToken);
     }
 }

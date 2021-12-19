@@ -2,6 +2,7 @@ using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PizzaCastle.MenuService.Application.MenuItems.Queries.GetAllMenuItems;
+using PizzaCastle.MenuService.Application.MenuItems.Queries.GetMenuItemById;
 using PizzaCastle.MenuService.Domain.Dtos;
 
 namespace PizzaCastle.MenuService.API.Controllers
@@ -37,9 +38,22 @@ namespace PizzaCastle.MenuService.API.Controllers
         [Route("items/{id:guid}")]
         [ProducesResponseType(typeof(MenuItemDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public IActionResult GetMenuItem(Guid id, CancellationToken cancellationToken)
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetMenuItem(Guid id, CancellationToken cancellationToken)
         {
-            return Ok();
+            if (id == Guid.Empty || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            
+            var result = await _mediator.Send(new GetMenuItemByIdQuery(id), cancellationToken);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(result);
         }
     }
 }
