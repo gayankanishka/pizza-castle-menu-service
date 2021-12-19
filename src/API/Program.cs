@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddHealthChecks();
 
 builder.Services
     .AddCors(o =>
@@ -29,6 +30,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors();
+
+app.MapHealthChecks("/health");
 
 app.UseHttpsRedirection();
 
