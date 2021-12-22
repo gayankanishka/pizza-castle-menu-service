@@ -92,11 +92,10 @@ namespace PizzaCastle.MenuService.API.Controllers
         [Route("categories")]
         [ProducesResponseType(typeof(MenuCategoryDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> AddMenuCategoryAsync([FromBody] AddMenuCategoryDto addMenuCategoryDto,
+        public async Task<IActionResult> AddMenuCategoryAsync([FromBody] AddMenuCategoryCommand command,
             CancellationToken cancellationToken)
         {
-            var results = await _mediator.Send(new AddMenuCategoryCommand(addMenuCategoryDto),
-                cancellationToken);
+            var results = await _mediator.Send(command, cancellationToken);
             return Created(nameof(AddMenuCategoryAsync), results);
         }
         

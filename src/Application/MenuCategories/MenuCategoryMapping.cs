@@ -1,4 +1,5 @@
 using AutoMapper;
+using PizzaCastle.MenuService.Application.MenuCategories.Commands.AddMenuCategory;
 using PizzaCastle.MenuService.Domain.Dtos;
 using PizzaCastle.MenuService.Domain.Entities;
 
@@ -9,6 +10,6 @@ public class MenuCategoryMapping : Profile
     public MenuCategoryMapping()
     {
         CreateMap<MenuCategory, MenuCategoryDto>();
-        CreateMap<AddMenuCategoryDto, MenuCategory>();
+        CreateMap<AddMenuCategoryCommand, MenuCategory>();
     }
 }
