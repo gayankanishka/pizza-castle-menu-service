@@ -21,14 +21,14 @@ public class AddMenuItemCommandHandler : IRequestHandler<AddMenuItemCommand, Men
     
     public async Task<MenuItemDto> Handle(AddMenuItemCommand request, CancellationToken cancellationToken)
     {
-        var category = await _categoryRepository.GetMenuCategoryAsync(request.CategoryId, cancellationToken);
+        var category = await _categoryRepository.GetMenuCategoryAsync(request.MenuCategoryId, cancellationToken);
 
         if (category == null)
         {
             throw new Exception("Category not found");
         }
         
-        var menuItem = _mapper.Map<MenuItem>(request.AddMenuItemDto);
+        var menuItem = _mapper.Map<MenuItem>(request);
         menuItem.MenuCategory = category;
         
         await _repository.AddAsync(menuItem, cancellationToken);

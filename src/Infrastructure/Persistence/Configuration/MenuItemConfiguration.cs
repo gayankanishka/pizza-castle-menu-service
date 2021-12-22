@@ -19,7 +19,7 @@ public class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
                 ImageUrl = "https://arthurs.lk/wp-content/uploads/2021/11/pilla-pizza-2.png",
                 ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2021/11/pilla-pizza-2-300x300.png",
                 MenuCategoryId = Guid.Parse("6E319C7E-8E1B-41BC-8784-4BDB8608ACA2"),
-                Ingrediants = "Tomato, cheese, olive oil"
+                Ingredients = "Tomato, cheese, olive oil"
             },
             new MenuItem{
                 Id = Guid.NewGuid(),
@@ -29,7 +29,7 @@ public class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
                 ImageUrl = "https://arthurs.lk/wp-content/uploads/2019/12/AP_web_photos4.png",
                 ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2019/12/AP_web_photos4-300x300.png",
                 MenuCategoryId = Guid.Parse("6E319C7E-8E1B-41BC-8784-4BDB8608ACA2"),
-                Ingrediants = "Chicken, ham, mutton, chicken sausage, Chicken Bacon, salami & mozzarella."
+                Ingredients = "Chicken, ham, mutton, chicken sausage, Chicken Bacon, salami & mozzarella."
             },
             new MenuItem{
                 Id = Guid.NewGuid(),
@@ -39,7 +39,7 @@ public class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
                 ImageUrl = "https://arthurs.lk/wp-content/uploads/2020/04/AP_web_photos31.png",
                 ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2020/04/AP_web_photos31-300x300.png",
                 MenuCategoryId = Guid.Parse("F3213095-31CD-4647-8FD5-C04A18A2484B"),
-                Ingrediants = "Swiss, parmesan, paneer & mozzarella."
+                Ingredients = "Swiss, parmesan, paneer & mozzarella."
             },
             new MenuItem{
                 Id = Guid.NewGuid(),
@@ -49,7 +49,7 @@ public class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
                 ImageUrl = "https://arthurs.lk/wp-content/uploads/2019/12/AP_web_photos2.png",
                 ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2019/12/AP_web_photos2-300x300.png",
                 MenuCategoryId = Guid.Parse("FD7D057F-C0B7-404C-ABAF-1555E474C2D5"),
-                Ingrediants = "Salami & mozzarella."
+                Ingredients = "Salami & mozzarella."
             },
             new MenuItem{
                 Id = Guid.NewGuid(),
@@ -59,7 +59,7 @@ public class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
                 ImageUrl = "https://arthurs.lk/wp-content/uploads/2019/12/AP_web_photos3.png",
                 ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2019/12/AP_web_photos3-300x300.png",
                 MenuCategoryId = Guid.Parse("FD7D057F-C0B7-404C-ABAF-1555E474C2D5"),
-                Ingrediants = "Mutton, bacon, chicken & mozzarella."
+                Ingredients = "Mutton, bacon, chicken & mozzarella."
             },
             new MenuItem{
                 Id = Guid.NewGuid(),
@@ -69,7 +69,7 @@ public class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
                 ImageUrl = "https://arthurs.lk/wp-content/uploads/2020/06/AP_web_photos33.png",
                 ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2020/06/AP_web_photos33-300x300.png",
                 MenuCategoryId = Guid.Parse("F3213095-31CD-4647-8FD5-C04A18A2484B"),
-                Ingrediants = "Vegetables & mozzarella."
+                Ingredients = "Vegetables & mozzarella."
             },
             new MenuItem{
                 Id = Guid.NewGuid(),
@@ -79,7 +79,7 @@ public class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
                 ImageUrl = "https://arthurs.lk/wp-content/uploads/2020/01/AP_web_photos32.png",
                 ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2020/01/AP_web_photos32-300x300.png",
                 MenuCategoryId = Guid.Parse("3457A568-216D-41C1-A586-36483280A3DA"),
-                Ingrediants = "Chicken, nai miris, onions, curry leaves & mozzarella."
+                Ingredients = "Chicken, nai miris, onions, curry leaves & mozzarella."
             },
             new MenuItem{
                 Id = Guid.NewGuid(),
@@ -89,7 +89,7 @@ public class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
                 ImageUrl = "https://arthurs.lk/wp-content/uploads/2020/04/AP_web_photos29-1.png",
                 ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2020/04/AP_web_photos29-1-300x300.png",
                 MenuCategoryId = Guid.Parse("3457A568-216D-41C1-A586-36483280A3DA"),
-                Ingrediants = "Chicken, nai miris, onions, curry leaves & mozzarella."
+                Ingredients = "Chicken, nai miris, onions, curry leaves & mozzarella."
             });
     }
 }   

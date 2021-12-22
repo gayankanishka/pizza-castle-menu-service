@@ -1,4 +1,5 @@
 using AutoMapper;
+using PizzaCastle.MenuService.Application.MenuItems.Commands.AddMenuItem;
 using PizzaCastle.MenuService.Domain.Dtos;
 using PizzaCastle.MenuService.Domain.Entities;
 
@@ -9,6 +10,6 @@ public class MenuItemMapping : Profile
     public MenuItemMapping()
     {
         CreateMap<MenuItem, MenuItemDto>();
-        CreateMap<AddMenuItemDto, MenuItem>();
+        CreateMap<AddMenuItemCommand, MenuItem>();
     }
 }
