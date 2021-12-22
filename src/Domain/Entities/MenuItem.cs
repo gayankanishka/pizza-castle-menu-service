@@ -14,5 +14,6 @@ public class MenuItem : AuditableEntity
     [Required]
     public double Price { get; set; }
     public string ImageUrl { get; set; }
+    public string ImageThumbnailUrl { get; set; }
     public string Ingrediants { get; set; }
 }

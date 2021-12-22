@@ -10,5 +10,6 @@ public class MenuItemDto
     public MenuCategoryDto MenuCategory { get; set; }
     public double Price { get; set; }
     public string ImageUrl { get; set; }
+    public string ImageThumbnailUrl { get; set; }
     public string Ingrediants { get; set; }
 }
