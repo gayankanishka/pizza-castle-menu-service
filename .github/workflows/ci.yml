@@ -26,17 +26,18 @@ jobs:
           restore-keys: ${{ runner.os }}-buildx-
 
       - name: Build Image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./
-          file: ./src/API/Dockerfile
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
-          push: false
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/pizza-castle-menu-service:latest
-          outputs: build/docker/artifacts/docker-image.tar
+        env:
+          DOCKER_ORG: gayankanishka
+          DOCKER_REPO: pizza-castle-menu-service
+          DOCKER_TAG: latest
+        run: |
+          export DOCKER_FULLTAG="${DOCKER_ORG}/${DOCKER_REPO}:${DOCKER_TAG//\\//-}"
+          docker build -t "$DOCKER_FULLTAG" .
+          mkdir -p build/artifacts
+          docker save "$DOCKER_FULLTAG" > build/artifacts/docker-image.tar
+          echo "$DOCKER_FULLTAG" > build/artifacts/docker-tag
 
       - uses: actions/upload-artifact@v2
         with:
           name: docker-artifact
-          path: build/docker/artifacts
+          path: build/artifacts
