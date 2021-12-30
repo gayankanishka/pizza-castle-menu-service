@@ -37,7 +37,7 @@ jobs:
       - name: Set Image Tag
         run: |
           export DOCKER_TAG=dev-${GITHUB_SHA:0:7}-$(date +%s)
-          echo "::set-env name=DOCKER_TAG::$DOCKER_TAG"
+          echo "DOCKER_TAG=$DOCKER_TAG" >> $GITHUB_ENV
 
       - name: Docker - Build and push
         uses: docker/build-push-action@v2
