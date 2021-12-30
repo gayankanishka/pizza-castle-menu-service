@@ -31,7 +31,7 @@ public class MenuCategoryConfiguration : IEntityTypeConfiguration<MenuCategory>
             },
             new MenuCategory
             {
-                Id = Guid.Parse("3457A568-216D-41C1-A586-36564280A3DX"),
+                Id = Guid.Parse("B3D44E13-8712-4B91-9A2F-45328993D251"),
                 Name = "Test"
             });
     }
