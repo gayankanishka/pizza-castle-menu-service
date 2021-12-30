@@ -3,9 +3,9 @@ name: Push STAGING Image
 on:
   workflow_dispatch:
     inputs:
-      name:
+      build_tag:
         type: string
-        description: Enter build tag
+        description: Enter DEV build tag
         required: true
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker pull gayankanishka/pizza-castle-menu-service:${{ github.event.inputs.message }}
+          docker pull gayankanishka/pizza-castle-menu-service:${{ github.event.inputs.build_tag }}
           export DOCKER_FULLTAG=gayankanishka/pizza-castle-menu-service:staging-${GIT_SHA:0:7}-$(date +%s)
           docker image tag gayankanishka/pizza-castle-menu-service ${DOCKER_FULLTAG}
           docker image push ${DOCKER_FULLTAG}
