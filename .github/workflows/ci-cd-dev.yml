@@ -47,7 +47,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/pizza-castle-menu-service:${{ DOCKER_TAG }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/pizza-castle-menu-service:${{ env.DOCKER_TAG }}
 
       - name: Move cache
         run: |
