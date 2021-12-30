@@ -21,10 +21,12 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          docker pull gayankanishka/pizza-castle-menu-service:${{ github.event.inputs.build_tag }}
-          export DOCKER_FULLTAG=gayankanishka/pizza-castle-menu-service:staging-${GIT_SHA:0:7}-$(date +%s)
-          docker image tag gayankanishka/pizza-castle-menu-service ${DOCKER_FULLTAG}
-          docker image push ${DOCKER_FULLTAG}
+          export DEV_FULLTAG=gayankanishka/pizza-castle-menu-service:${{ github.event.inputs.build_tag }}
+          export STAGING_FULLTAG=gayankanishka/pizza-castle-menu-service:staging-${GIT_SHA:0:7}-$(date +%s)
+
+          docker pull ${DEV_FULLTAG}
+          docker image tag ${DEV_FULLTAG} ${STAGING_FULLTAG}
+          docker image push ${STAGING_FULLTAG}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
