@@ -32,7 +32,7 @@ jobs:
           DOCKER_TAG: latest
         run: |
           export DOCKER_FULLTAG="${DOCKER_ORG}/${DOCKER_REPO}:${DOCKER_TAG//\\//-}"
-          docker build -t "$DOCKER_FULLTAG" .
+          docker buildx build --cache-from "type=local,src=/tmp/.buildx-cache" --cache-to "type=local,dest=/tmp/.buildx-cache,mode=max" -t "$DOCKER_FULLTAG" .
           mkdir -p build/artifacts
           docker save "$DOCKER_FULLTAG" > build/artifacts/docker-image.tar
           echo "$DOCKER_FULLTAG" > build/artifacts/docker-tag
