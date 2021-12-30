@@ -13,11 +13,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    env:
-      - name: GIT_SHA
-        value: '${{ github.sha }}'
-      - name: GIT_BRANCH
-        value: ${{ github.ref }}
 
     steps:
       - name: Checkout source
