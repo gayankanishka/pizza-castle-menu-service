@@ -13,6 +13,11 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      - name: GIT_SHA
+        value: '${{ github.sha }}'
+      - name: GIT_BRANCH
+        value: ${{ github.ref }}
 
     steps:
       - name: Checkout source
@@ -42,7 +47,9 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/pizza-castle-menu-service:dev-${GIT_SHA:0:7}-$(date +%s)
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/pizza-castle-menu-service:$TAG
+        env:
+          TAG: dev-${GITHUB_SHA:0:7}-$(date +%s)
 
       - name: Move cache
         run: |
