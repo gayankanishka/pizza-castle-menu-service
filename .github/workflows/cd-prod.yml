@@ -22,7 +22,7 @@ jobs:
       - name: Push Docker Image
         run: |
           export STAGING_FULLTAG=gayankanishka/pizza-castle-menu-service:${{ github.event.inputs.build_tag }}
-          export PROD_FULLTAG=gayankanishka/pizza-castle-menu-service:staging-${GIT_SHA:0:7}-$(date +%s)
+          export PROD_FULLTAG=gayankanishka/pizza-castle-menu-service:staging-${GITHUB_SHA:0:7}-$(date +%s)
 
           docker pull ${STAGING_FULLTAG}
           docker image tag ${STAGING_FULLTAG} ${PROD_FULLTAG}
