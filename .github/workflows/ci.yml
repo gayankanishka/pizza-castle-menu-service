@@ -15,16 +15,6 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
 
-      - name: Setup buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Setup layer cache
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-buildx-
-
       - name: Build Image
         env:
           DOCKER_ORG: gayankanishka
@@ -32,7 +22,7 @@ jobs:
           DOCKER_TAG: latest
         run: |
           export DOCKER_FULLTAG="${DOCKER_ORG}/${DOCKER_REPO}:${DOCKER_TAG//\\//-}"
-          docker buildx build --cache-from "type=local,src=/tmp/.buildx-cache" --cache-to "type=local,dest=/tmp/.buildx-cache-new,mode=max" -t "$DOCKER_FULLTAG" .
+          docker build -t "$DOCKER_FULLTAG" .
           mkdir -p build/artifacts
           docker save "$DOCKER_FULLTAG" > build/artifacts/docker-image.tar
           echo "$DOCKER_FULLTAG" > build/artifacts/docker-tag
@@ -41,8 +31,3 @@ jobs:
         with:
           name: docker-artifact
           path: build/artifacts
-
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
