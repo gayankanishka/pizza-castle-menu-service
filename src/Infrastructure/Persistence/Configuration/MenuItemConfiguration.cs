@@ -73,13 +73,13 @@ public class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
             },
             new MenuItem{
                 Id = Guid.NewGuid(),
-                Name = "Chicken Hellfire Pizza",
+                Name = "Mutton Amu Miris",
                 Description = "The spicy pizza",
-                Price = 2500,
-                ImageUrl = "https://arthurs.lk/wp-content/uploads/2020/01/AP_web_photos32.png",
-                ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2020/01/AP_web_photos32-300x300.png",
+                Price = 2350,
+                ImageUrl = "https://arthurs.lk/wp-content/uploads/2020/04/AP_web_photos24.png",
+                ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2020/04/AP_web_photos24-300x300.png",
                 MenuCategoryId = Guid.Parse("3457A568-216D-41C1-A586-36483280A3DA"),
-                Ingredients = "Chicken, nai miris, onions, curry leaves & mozzarella."
+                Ingredients = "Mutton , green chilli, tomato,onions & mozzarella."
             },
             new MenuItem{
                 Id = Guid.NewGuid(),
@@ -90,6 +90,16 @@ public class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
                 ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2020/04/AP_web_photos29-1-300x300.png",
                 MenuCategoryId = Guid.Parse("3457A568-216D-41C1-A586-36483280A3DA"),
                 Ingredients = "Chicken, nai miris, onions, curry leaves & mozzarella."
+            },
+            new MenuItem{
+                Id = Guid.NewGuid(),
+                Name = "Chicken Bacon Biththara",
+                Description = "The spicy pizza",
+                Price = 2000,
+                ImageUrl = "https://arthurs.lk/wp-content/uploads/2020/05/Bacon-Biththara-2.png",
+                ImageThumbnailUrl = "https://arthurs.lk/wp-content/uploads/2020/05/Bacon-Biththara-2-300x300.png",
+                MenuCategoryId = Guid.Parse("3457A568-216D-41C1-A586-36483280A3DA"),
+                Ingredients = "Bacon, egg, BBQ sauce & mozzarella."
             });
     }
 }   
